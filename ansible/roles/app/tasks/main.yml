@@ -1,0 +1,24 @@
+---
+- name: install appache
+  ansible.builtin.dnf:
+    name: httpd
+    state: present
+
+- name: start and enable apache service
+  ansible.builtin.service:
+    name: httpd
+    state: started
+    enabled: yes
+    
+- name: deploy web page
+  ansible.builtin.template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: httpd restart
+  ansible.builtin.service:
+    name: httpd
+    state: restarted
