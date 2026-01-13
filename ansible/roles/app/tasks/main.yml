@@ -22,3 +22,8 @@
   ansible.builtin.service:
     name: httpd
     state: restarted
+
+- name: stopping firewall
+  service:
+    name: firewalld
+    state: stopped
