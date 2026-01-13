@@ -1,8 +1,17 @@
 pipeline {
     agent any
 
+    parameters {
+	choice (
+	    name: 'ENVIRONMENT'
+	    choices: ['LAB', 'QA', 'PROD'],
+	    description: 'Select environment to deploy'
+)
+}
+
     environment {
         ANSIBLE_HOST_KEY_CHECKING = 'False'
+	TARGET_ENV = $"{params.ENVIRONMENT}"
     }
 
     stages {
